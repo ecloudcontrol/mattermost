@@ -1,8 +1,7 @@
 app:
   name: Mattermost
   code: mattermost
-  notify: eachakala@ecloudcontrol.com
-
+  notify: appz@ecloudcontrol.com
 build:
   version: 6.3
   env: DEV
@@ -11,7 +10,7 @@ build:
   image_template: mattermost-6.3
   
 deploy:
-  context: eeshaachakala1/DEV
+  context: alpha/DEV
   type: statefulset
   replicas: 1
   port:
@@ -36,6 +35,6 @@ properties:
   MM_FILESETTINGS_DIRECTORY: /appz/data/
   MM_TEAMSETTINGS_SITENAME: MySlack
   MM_TEAMSETTINGS_ENABLECUSTOMBRAND: true
-  MM_TEAMSETTINGS_CUSTOMBRANDTEXT: appz-Slack
+  MM_TEAMSETTINGS_CUSTOMBRANDTEXT: MySlack
   revision : 36
   
