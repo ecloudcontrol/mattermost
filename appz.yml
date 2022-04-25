@@ -1,0 +1,41 @@
+app:
+  name: Mattermost
+  code: mattermost
+  notify: eachakala@ecloudcontrol.com
+
+build:
+  version: 6.3
+  env: DEV
+  build_file: none
+  output_files: output/*.zip
+  image_template: mattermost-6.3
+  
+deploy:
+  context: eeshaachakala1/DEV
+  type: statefulset
+  replicas: 1
+  port:
+  - 8065
+  
+volumes:
+- claim: mattermost-data
+  mount: /appz/data
+  name: data
+  size: 5Gi
+  
+properties:
+  POSTGRESQL_HOST: mm-postgres-13-x
+  MM_USERNAME: mmuser
+  MM_PASSWORD:
+      vault: POSTGRES_MMUSER_PASSWORD
+  MM_DBNAME: mattermost
+  MM_SQLSETTINGS_DRIVERNAME: postgres
+  MM_EMAILSETTINGS_SENDEMAILNOTIFICATIONS: true
+  MM_TEAMSETTINGS_ENABLEOPENSERVER: true
+  MM_SERVICESETTINGS_ENABLEEMAILINVITATIONS: true
+  MM_FILESETTINGS_DIRECTORY: /appz/data/
+  MM_TEAMSETTINGS_SITENAME: MySlack
+  MM_TEAMSETTINGS_ENABLECUSTOMBRAND: true
+  MM_TEAMSETTINGS_CUSTOMBRANDTEXT: appz-Slack
+  revision : 36
+  
